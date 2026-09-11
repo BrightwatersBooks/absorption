@@ -107,10 +107,56 @@
   p.body{color:var(--muted);font-size:14px;max-width:96ch;margin:0 0 11px;line-height:1.55}
   p.body:last-child{margin-bottom:0}
   p.body b{color:var(--text)}
+  body:not(.unlocked) .wrap{visibility:hidden;height:0;overflow:hidden;padding:0;margin:0}
+  .lock{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;
+    background:var(--bg);padding:20px}
+  body.unlocked .lock{display:none}
+  .lock-box{background:var(--panel);border:1px solid var(--line);border-radius:13px;
+    padding:28px 24px;width:min(92vw,400px)}
+  .lock-box h2{margin:0 0 8px;font-size:22px}
+  .lock-box p{margin:0 0 16px;color:var(--muted);font-size:14px}
+  .lock-box input[type="password"]{width:100%;background:#070a0e;border:1px solid var(--line2);
+    color:var(--text);border-radius:7px;padding:10px 10px;font-size:16px}
+  .lock-box input[type="password"]:focus{outline:2px solid var(--yev);outline-offset:1px}
+  .lock-err{color:var(--bad);font-size:13px;min-height:1.2em;margin:8px 0 0}
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
+<div class="lock" id="lock">
+  <form class="lock-box" id="lockForm">
+    <h2>Password required</h2>
+    <p>Enter the password to open the absorption model.</p>
+    <input type="password" id="lockPass" autocomplete="current-password" autofocus>
+    <div class="lock-err" id="lockErr"></div>
+    <button type="submit">Open page</button>
+  </form>
+</div>
+<script>
+(function(){
+  var KEY = "abs-gate";
+  var HASH = "3c02ba662ea61234511e34fcd2269c0b527c9fe6bc8d466398de6393c5a7c0b3";
+  function unlock(){ document.body.classList.add("unlocked"); }
+  if (sessionStorage.getItem(KEY) === HASH) unlock();
+  document.getElementById("lockForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var pass = document.getElementById("lockPass").value;
+    crypto.subtle.digest("SHA-256", new TextEncoder().encode(pass)).then(function(buf){
+      var hex = Array.from(new Uint8Array(buf)).map(function(b){
+        return b.toString(16).padStart(2, "0");
+      }).join("");
+      if (hex === HASH){
+        sessionStorage.setItem(KEY, HASH);
+        unlock();
+      } else {
+        document.getElementById("lockErr").textContent = "Wrong password.";
+        document.getElementById("lockPass").value = "";
+        document.getElementById("lockPass").focus();
+      }
+    });
+  });
+})();
+</script>
 <div class="wrap">
 
 <h1>Hypothetical Intranasal siRNA Absorption Model Mock Up Version 02</h1>
