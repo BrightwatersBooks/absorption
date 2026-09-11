@@ -1,0 +1,7 @@
+# Netlify CLI
+.netlify
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,15 @@
+# Static HTML site — Netlify publishes the repo root with no build step.
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/"
+  to = "/hypothetical_intranasal_sirna_absorption_model_mock_up.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
