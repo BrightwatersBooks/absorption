@@ -22,7 +22,9 @@
 
   /* intro */
   .intro{margin-top:16px}
-  .intro ul{margin:0;padding-left:20px}
+  .intro p{margin:0 0 11px;color:var(--muted);font-size:15px;line-height:1.5;max-width:96ch}
+  .intro ul,.intro ol{margin:0;padding-left:22px}
+  .intro ol{margin-bottom:14px}
   .intro li{margin-bottom:11px;color:var(--muted);font-size:15px;line-height:1.5}
   .intro li:last-child{margin-bottom:0}
   .intro b{color:var(--text);font-weight:700}
@@ -162,6 +164,14 @@
 <h1>Hypothetical Intranasal siRNA Absorption Model Mock Up Version 02</h1>
 
 <div class="intro">
+<p>Simulation modeling could be used to inform device and carrier decisions and improve results in our upcoming experiments.</p>
+<p>This mock up of a model contains sample contents which have not been fully verified. Its purpose is to show a scaffolding for building an interactive nasal absorption simulation which can reveal experimental and design priorities. It proposes two in vitro experiments for providing the enabling data for building an operational model.</p>
+<p>This model covers the first of three stages in the path from delivery device to receptor knockdown:</p>
+<ol>
+  <li><b>Nasal absorption.</b> Delivery device to CNS entry site (olfactory or trigeminal neuron or perivascular space)</li>
+  <li><b>Transport from CNS entry site to target neuron soma</b> (retrograde or CSF)</li>
+  <li><b>Internal neuron results</b> (transfection, endosomal escape, editing efficiency and duration.)</li>
+</ol>
 <ul>
   <li><b>Objective.</b> Decide whether an HTR2A siRNA gets into brain tissue better as a 5 nm lipid conjugate or
   a 180 nm yeast extracellular vesicle, and which of two nasal devices to pair with it. Endpoint is siRNA
